@@ -10,7 +10,7 @@ using namespace std;
 long long a[AS];
 long long global_idx = 0;
 long long th_sum = 0, sum = 0;
-pthread_mutex_t mutex1;
+pthread_spinlock_t mutex1;
 int err;
 
 void *do_work(void * tid)
@@ -25,12 +25,14 @@ void *do_work(void * tid)
         local += a[i];
     }
 
-    pthread_mutex_lock(&mutex1);
+    pthread_spin_trylock(&mutex1);
     th_sum+=local;
-    pthread_mutex_unlock(&mutex1);
+    pthread_spin_unlock(&mutex1);
 
     return NULL;
 }
+
+
 
 int main()
 {

@@ -12,7 +12,6 @@
                 "${fileDirname}/${fileBasenameNoExtension}",
                 "-pthread",
                 "-Wall",
-                "-mcmodel=medium"
             ],
             "options": {
                 "cwd": "${fileDirname}"
